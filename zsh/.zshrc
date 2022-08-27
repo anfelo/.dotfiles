@@ -99,5 +99,17 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+
+# Bindings
+bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^h "tmux-cht.sh\n"
+
+# My aliases
+alias lg="lazygit"
+
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+
 eval "$(starship init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
