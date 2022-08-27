@@ -99,5 +99,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+
 eval "$(starship init zsh)"
+
