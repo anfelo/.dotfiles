@@ -40,7 +40,6 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 Plug 'ayu-theme/ayu-vim'
 Plug 'ryanoasis/vim-devicons'
@@ -48,6 +47,18 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
 
 Plug 'jiangmiao/auto-pairs'
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-commentary'
+Plug 'petertriho/nvim-scrollbar'
+
+Plug 'airblade/vim-gitgutter'
+
+" Syntax Highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neovim/nvim-lspconfig'
+
+" CSS
+Plug 'ap/vim-css-color'
 
 call plug#end()
 
@@ -58,6 +69,30 @@ colorscheme ayu
 
 " File browser
 let NERDTreeShowHidden = 1
+
+" IndentLine
+let g:indentLine_setColors = 0
+
+" Scrollbar
+lua require("scrollbar").setup()
+
+" TreeSitter
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true
+    },
+    indent = {
+        enable = true
+    }
+}
+EOF
+
+" LSP Config
+lua require("lsp_config")
+
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua goimports(1000)
 
 " Remaps
 let mapleader = " "
