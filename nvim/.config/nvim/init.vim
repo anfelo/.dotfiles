@@ -119,19 +119,13 @@ nnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+" Quickfix navigation
+noremap <C-j> :cnext<CR>
+noremap <C-k> :cprev<CR>
 
 " Telescope remaps
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope live_grep<CR>
 nnoremap <leader>fb <cmd>Telescope buffers<CR>
 nnoremap <leader>fh <cmd>Telescope help_tags<CR>
-
-" Coc Autocomplete remaps
-" inoremap <expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<cr>"
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Tab navigation
-nnoremap <C-S-tab> :bprevious<CR>
-nnoremap <C-tab> :bnext<CR>
 

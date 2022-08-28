@@ -106,6 +106,7 @@ bindkey -s ^h "tmux-cht.sh\n"
 
 # My aliases
 alias lg="lazygit"
+alias docker-compose="docker compose"
 
 PATH="$HOME/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
