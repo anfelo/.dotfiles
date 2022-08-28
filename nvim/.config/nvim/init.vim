@@ -61,6 +61,9 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 " CSS
 Plug 'ap/vim-css-color'
@@ -97,7 +100,7 @@ EOF
 lua require("_lsp_config")
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.go lua goimports(1000)
+autocmd BufWritePre *.go lua go_imports(1000)
 " autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " Remaps
