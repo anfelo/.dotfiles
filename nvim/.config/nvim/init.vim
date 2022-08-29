@@ -42,31 +42,45 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 Plug 'ayu-theme/ayu-vim'
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 Plug 'preservim/nerdtree'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
 Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-ts-autotag'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
 Plug 'petertriho/nvim-scrollbar'
 
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'dinhhuy258/git.nvim'
 
-" Syntax Highlighting
+" Syntax Highlighting & LSP
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+
+" Snippets
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'onsails/lspkind-nvim'
 
 " CSS
 Plug 'ap/vim-css-color'
+
+" Prettier
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'MunifTanjim/prettier.nvim'
 
 call plug#end()
 
@@ -77,31 +91,21 @@ colorscheme ayu
 
 " File browser
 let NERDTreeShowHidden = 1
-
 " IndentLine
 let g:indentLine_setColors = 0
 
-" Scrollbar
 lua require("scrollbar").setup()
-
-" TreeSitter
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-    highlight = {
-        enable = true
-    },
-    indent = {
-        enable = true
-    }
-}
-EOF
-
-" LSP Config
+lua require("_treesitter")
 lua require("_lsp_config")
+lua require("_lualine")
+lua require("bufferline").setup{}
+lua require("_null_ls")
+lua require("_prettier")
+lua require("gitsigns").setup{}
+lua require("_git")
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua go_imports(1000)
-" autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " Remaps
 let mapleader = " "
@@ -119,6 +123,7 @@ nnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
 " Quickfix navigation
 noremap <C-j> :cnext<CR>
 noremap <C-k> :cprev<CR>
@@ -129,3 +134,6 @@ nnoremap <leader>fg <cmd>Telescope live_grep<CR>
 nnoremap <leader>fb <cmd>Telescope buffers<CR>
 nnoremap <leader>fh <cmd>Telescope help_tags<CR>
 
+" Bufferline Tabs
+nnoremap <Tab> <cmd>BufferLineCycleNext<CR>
+nnoremap <S-Tab> <cmd>BufferLineCyclePrev<CR>
