@@ -134,6 +134,12 @@ nvim_lsp.tsserver.setup {
     on_attach = on_attach,
     filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 }
+nvim_lsp.svelteserver.setup {
+    cmd = { "svelteserver", "--stdio" },
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "svelte" }
+}
 
 function go_imports(wait_ms)
     local params = vim.lsp.util.make_range_params()

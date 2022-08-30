@@ -42,8 +42,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 Plug 'ayu-theme/ayu-vim'
+Plug 'xiyaowong/nvim-transparent'
 Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'preservim/nerdtree'
 Plug 'nvim-lualine/lualine.nvim'
@@ -58,6 +59,7 @@ Plug 'petertriho/nvim-scrollbar'
 " Plug 'airblade/vim-gitgutter'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'dinhhuy258/git.nvim'
+Plug 'APZelos/blamer.nvim'
 
 " Syntax Highlighting & LSP
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -93,6 +95,8 @@ colorscheme ayu
 let NERDTreeShowHidden = 1
 " IndentLine
 let g:indentLine_setColors = 0
+" Git Blamer
+let g:blamer_enabled = 1
 
 lua require("scrollbar").setup()
 lua require("_treesitter")
@@ -103,6 +107,7 @@ lua require("_null_ls")
 lua require("_prettier")
 lua require("gitsigns").setup{}
 lua require("_git")
+lua require("_transparent")
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua go_imports(1000)
