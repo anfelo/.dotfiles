@@ -16,7 +16,7 @@ set splitbelow splitright
 set title
 set ttimeoutlen=0
 set wildmenu
-set listchars=tab:>·,trail:~,extends:>,precedes:<
+set listchars=tab:>·,trail:~,extends:>,precedes:<,eol:↲
 set list
 set autowrite
 set colorcolumn=80
@@ -111,6 +111,7 @@ lua require("_transparent")
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua go_imports(1000)
+autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
 
 " Remaps
 let mapleader = " "
@@ -142,3 +143,4 @@ nnoremap <leader>fh <cmd>Telescope help_tags<CR>
 " Bufferline Tabs
 nnoremap <Tab> <cmd>BufferLineCycleNext<CR>
 nnoremap <S-Tab> <cmd>BufferLineCyclePrev<CR>
+nnoremap <C-w> <cmd>BufferLinePickClose<CR>
