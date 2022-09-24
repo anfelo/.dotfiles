@@ -64,10 +64,14 @@ Plug 'APZelos/blamer.nvim'
 " Syntax Highlighting & LSP
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
+
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 
 " Snippets
 Plug 'saadparwaiz1/cmp_luasnip'
@@ -100,7 +104,10 @@ let g:blamer_enabled = 1
 
 lua require("scrollbar").setup()
 lua require("_treesitter")
+lua require("_cmp")
 lua require("_lsp_config")
+lua require("_lspsaga")
+lua require("_mason")
 lua require("_lualine")
 lua require("bufferline").setup{}
 lua require("_null_ls")
