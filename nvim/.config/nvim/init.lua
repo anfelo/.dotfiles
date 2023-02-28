@@ -53,6 +53,7 @@ require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
     use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+    use 'maxmellon/vim-jsx-pretty'
 
     use { "akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
@@ -357,6 +358,7 @@ local on_attach = function(_, bufnr)
 
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+    nmap('<leader>e', vim.diagnostic.open_float)
 
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
     nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
