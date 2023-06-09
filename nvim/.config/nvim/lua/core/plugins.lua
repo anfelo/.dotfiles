@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter-context'
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter',
@@ -53,6 +54,7 @@ return require('packer').startup(function(use)
     use 'folke/trouble.nvim'
     use 'github/copilot.vim'
     use 'ThePrimeagen/harpoon'
+    use 'ThePrimeagen/vim-be-good'
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
