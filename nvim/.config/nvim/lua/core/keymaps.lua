@@ -35,6 +35,8 @@ vim.opt.expandtab = true
 -- Indents
 vim.opt.autoindent = true
 
+vim.opt.showmode = false
+
 vim.opt.scrolloff = 8
 vim.opt.isfname:append("@-@")
 
