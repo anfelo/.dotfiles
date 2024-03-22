@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # ----------------------------------
+    # ------------ Linux ---------------
+    # ----------------------------------
+    set -env
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # ----------------------------------
+    # ------------ Mac OSX -------------
+    # ----------------------------------
+
+    # Install Homebrew
+    if ! [ -x "$(command -v brew)" ]; then
+        echo "Installing homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    # Install Ansible
+    if ! [ -x "$(command -v ansible)" ]; then
+        echo "Installing ansible..."
+        brew install ansible
+    fi
+else
+    # Unknown.
+    echo "Unknown OS"
+fi
