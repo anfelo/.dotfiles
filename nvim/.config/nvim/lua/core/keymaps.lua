@@ -43,7 +43,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.showmode = false
 
 vim.opt.colorcolumn = "80"
-vim.opt.listchars = "tab:>·,trail:~,extends:>,precedes:<"
+vim.opt.listchars = "tab:>·,trail:~,extends:>,precedes:<,eol:↲"
 vim.opt.list = true
 
 vim.g.mapleader = " "
