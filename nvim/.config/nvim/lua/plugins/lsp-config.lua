@@ -31,8 +31,11 @@ return {
                     },
                     workspace = {
                         -- Make the server aware of Neovim runtime files and plugins
-                        library = { vim.env.VIMRUNTIME },
-                        checkThirdParty = false,
+                        library = {
+                            vim.env.VIMRUNTIME,
+                            "${3rd}/busted/library",
+                        },
+                        checkThirdParty = true,
                     },
                     telemetry = {
                         enable = false,
