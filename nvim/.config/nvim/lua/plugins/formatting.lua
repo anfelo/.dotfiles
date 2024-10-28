@@ -18,6 +18,8 @@ return {
                 yaml = { "prettierd" },
                 markdown = { "prettierd" },
                 lua = { "stylua" },
+                c = { "clangd" },
+                cpp = { "clangd" }
             },
         })
 

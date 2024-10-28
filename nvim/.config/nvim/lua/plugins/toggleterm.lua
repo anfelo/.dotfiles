@@ -1,8 +1,12 @@
 return {
     "akinsho/toggleterm.nvim",
-    version = "*",
-    opts = {
-        open_mapping = [[<c-\>]],
-        direction = "horizontal",
-    },
+    event = "ColorScheme",
+    config = function()
+        local highlights = require("rose-pine.plugins.toggleterm")
+        require("toggleterm").setup({
+            open_mapping = [[<c-\>]],
+            direction = "horizontal",
+            highlights = highlights,
+        })
+    end,
 }

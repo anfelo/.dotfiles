@@ -9,7 +9,7 @@ return {
             transparent = false, -- Enable this to disable setting the background color
         })
 
-        vim.o.termguicolors = true
-        vim.cmd([[ colorscheme tokyonight ]])
+        -- vim.o.termguicolors = true
+        -- vim.cmd([[ colorscheme tokyonight ]])
     end,
 }

@@ -14,7 +14,14 @@ return {
     config = function()
         local servers = {
             clangd = {},
-            gopls = {},
+            gopls = {
+                experimentalPostfixCompletions = true,
+                analyses = {
+                    unusedparams = true,
+                    shadow = true,
+                },
+                staticcheck = true,
+            },
             rust_analyzer = {},
             tsserver = {},
 
