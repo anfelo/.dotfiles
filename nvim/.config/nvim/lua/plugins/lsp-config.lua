@@ -2,17 +2,14 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
         -- Automatically install LSPs to stdpath for neovim
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason.nvim",
+        "mason-org/mason-lspconfig.nvim",
 
         -- Useful status updates for LSP
         { "j-hui/fidget.nvim", opts = {} },
-
-        -- Additional lua configuration, makes nvim stuff amazing
-        "folke/neodev.nvim",
     },
-    config = function()
-        local servers = {
+    opts = {
+        servers = {
             clangd = {},
             gopls = {
                 experimentalPostfixCompletions = true,
@@ -23,33 +20,34 @@ return {
                 staticcheck = true,
             },
             rust_analyzer = {},
-            tsserver = {},
-
-            lua_ls = {
-                Lua = {
-                    runtime = {
-                        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                        version = "LuaJIT",
-                        path = vim.split(package.path, ";"),
-                    },
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = { "vim", "P" },
-                    },
-                    workspace = {
-                        -- Make the server aware of Neovim runtime files and plugins
-                        library = {
-                            vim.env.VIMRUNTIME,
-                            "${3rd}/busted/library",
+            ts_ls = {
+                init_options = {
+                    plugins = {
+                        {
+                            name = "@vue/typescript-plugin",
+                            location = vim.fn.stdpath("data")
+                                .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+                            languages = { "vue" },
                         },
-                        checkThirdParty = true,
-                    },
-                    telemetry = {
-                        enable = false,
                     },
                 },
+                filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
             },
-        }
+            lua_ls = {},
+            angularls = {},
+            volar = {},
+            ols = {},
+            zls = {},
+        },
+    },
+    config = function(_, opts)
+        local lspconfig = require("lspconfig")
+        for server, config in pairs(opts.servers) do
+            -- passing config.capabilities to blink.cmp merges with the capabilities in your
+            -- `opts[server].capabilities, if you've defined it
+            config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+            lspconfig[server].setup(config)
+        end
 
         local on_attach = function(_, bufnr)
             local nmap = function(keys, func, desc)
@@ -73,7 +71,7 @@ return {
 
             -- See `:help K` for why this keymap
             nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-            nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+            -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
             -- Lesser used LSP functionality
             nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -89,27 +87,11 @@ return {
             end, { desc = "Format current buffer with LSP" })
         end
 
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-        require("mason").setup()
-
-        local mason_lspconfig = require("mason-lspconfig")
-
-        mason_lspconfig.setup({
-            ensure_installed = vim.tbl_keys(servers),
-        })
-        mason_lspconfig.setup_handlers({
-            function(server_name)
-                require("lspconfig")[server_name].setup({
-                    capabilities = capabilities,
-                    on_attach = on_attach,
-                    settings = servers[server_name],
-                })
+        vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(args)
+                on_attach(nil, args.buf)
             end,
         })
-
-        require("neodev").setup()
 
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next)

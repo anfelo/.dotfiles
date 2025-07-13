@@ -13,13 +13,16 @@ return {
                 typescriptreact = { "prettierd" },
                 svelte = { "prettierd" },
                 css = { "prettierd" },
+                scss = { "prettierd" },
                 html = { "prettierd" },
                 json = { "prettierd" },
                 yaml = { "prettierd" },
+                vue = { "prettierd" },
+                htmlangular = { "prettierd" },
                 markdown = { "prettierd" },
                 lua = { "stylua" },
-                c = { "clangd" },
-                cpp = { "clangd" }
+                c = { "clang-format" },
+                cpp = { "clang-format" },
             },
         })
 
