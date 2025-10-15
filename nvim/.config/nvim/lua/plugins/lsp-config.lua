@@ -31,22 +31,23 @@ return {
                         },
                     },
                 },
+                cmd = { 'typescript-language-server', '--stdio' },
                 filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
             },
             lua_ls = {},
             angularls = {},
-            volar = {},
+            vue_ls = {},
             ols = {},
             zls = {},
         },
     },
     config = function(_, opts)
-        local lspconfig = require("lspconfig")
         for server, config in pairs(opts.servers) do
             -- passing config.capabilities to blink.cmp merges with the capabilities in your
             -- `opts[server].capabilities, if you've defined it
             config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-            lspconfig[server].setup(config)
+            vim.lsp.config(server, config)
+            vim.lsp.enable(server)
         end
 
         local on_attach = function(_, bufnr)

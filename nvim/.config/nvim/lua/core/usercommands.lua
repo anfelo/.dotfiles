@@ -22,10 +22,19 @@ end
 -- attach_to_buffer(28, "*.cpp", { "C:\\Users\\anfelo\\personal\\handmade\\code\\build.bat" })
 
 vim.api.nvim_create_user_command("AutoRun", function()
-    print "AutoRun starts now..."
-    local bufnr = vim.fn.input "Bufnr: "
-    local pattern = vim.fn.input "Pattern: "
-    local command = vim.split(vim.fn.input "Command: ", " ")
+    print("AutoRun starts now...")
+    local bufnr = vim.fn.input("Bufnr: ")
+    local pattern = vim.fn.input("Pattern: ")
+    local command = vim.split(vim.fn.input("Command: "), " ")
     attach_to_buffer(tonumber(bufnr), pattern, command)
 end, {})
 
+vim.api.nvim_create_user_command("NgMigrate", function()
+    print("Migrating...")
+    local what = vim.fn.input("Type:")
+    local path = vim.fn.expand('%:p:h')
+
+    if what == "control-flow" then
+        os.execute("npx nx g @angular/core:control-flow-migration --format=false --path=" .. path)
+    end
+end, {})
